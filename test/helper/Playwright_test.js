@@ -311,7 +311,6 @@ describe('Playwright', function () {
       .then(source => assert.notEqual(source.indexOf('<title>TestEd Beta 2.0</title>'), -1, 'Source html should be retrieved')));
   });
 
-
   describe('#seeTitleEquals', () => {
     it('should check that title is equal to provided one', () => I.amOnPage('/')
       .then(() => I.seeTitleEquals('TestEd Beta 2.0'))
@@ -541,7 +540,6 @@ describe('Playwright', function () {
       .then(() => I.seeInField('#text2', 'London')));
   });
 
-
   describe('#grabHTMLFrom', () => {
     it('should grab inner html from an element using xpath query', () => I.amOnPage('/')
       .then(() => I.grabHTMLFrom('//title'))
@@ -579,7 +577,7 @@ describe('Playwright', function () {
       .then(() => I.dragAndDrop('#draggable', '#droppable'))
       .then(() => I.see('Dropped')));
 
-    it('Drag and drop from within an iframe', () => I.amOnPage('http://jqueryui.com/droppable')
+    xit('Drag and drop from within an iframe', () => I.amOnPage('http://jqueryui.com/droppable')
       .then(() => I.resizeWindow(700, 700))
       .then(() => I.switchTo('//iframe[@class="demo-frame"]'))
       .then(() => I.seeElementInDOM('#draggable'))

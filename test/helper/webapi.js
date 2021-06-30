@@ -27,6 +27,20 @@ module.exports.tests = function () {
     if (fileExists(dataFile)) require('fs').unlinkSync(dataFile);
   });
 
+  describe('#saveElementScreenshot', () => {
+    beforeEach(() => {
+      global.output_dir = path.join(global.codecept_dir, 'output');
+    });
+
+    it('should create a screenshot file in output dir of element', async () => {
+      await I.amOnPage('/form/field');
+      await I.seeElement('input[name=\'name\']');
+      const sec = (new Date()).getUTCMilliseconds();
+      await I.saveElementScreenshot('input[name=\'name\']', `element_screenshot_${sec}.png`);
+      assert.ok(fileExists(path.join(global.output_dir, `element_screenshot_${sec}.png`)), null, 'file does not exists');
+    });
+  });
+
   describe('current url : #seeInCurrentUrl, #seeCurrentUrlEquals, #grabCurrentUrl, ...', () => {
     it('should check for url fragment', async () => {
       await I.amOnPage('/form/checkbox');
@@ -279,7 +293,6 @@ module.exports.tests = function () {
     });
   });
 
-
   // Could not get double click to work
   describe('#doubleClick', () => {
     it('it should doubleClick', async () => {
@@ -313,7 +326,6 @@ module.exports.tests = function () {
       await I.see('right clicked');
     });
   });
-
 
   describe('#checkOption', () => {
     it('should check option by css', async () => {
@@ -430,7 +442,6 @@ module.exports.tests = function () {
       const val = await I.executeScript(a => a + 5, 5);
       assert.equal(val, 10);
     });
-
 
     it('should return value from sync script in iframe', async function () {
       if (isHelper('Nightmare')) return; // TODO Not yet implemented
@@ -561,6 +572,38 @@ module.exports.tests = function () {
     });
   });
 
+  describe('#type', () => {
+    it('should type into a field', async function () {
+      if (isHelper('TestCafe')) this.skip();
+      if (isHelper('Nightmare')) return;
+      if (isHelper('Protractor')) this.skip();
+
+      await I.amOnPage('/form/field');
+      await I.click('Name');
+
+      await I.type('Type Test');
+      await I.seeInField('Name', 'Type Test');
+
+      await I.fillField('Name', '');
+
+      await I.type(['T', 'y', 'p', 'e', '2']);
+      await I.seeInField('Name', 'Type2');
+    });
+
+    it('should use delay to slow down typing', async function () {
+      if (isHelper('TestCafe')) this.skip();
+      if (isHelper('Nightmare')) return;
+      if (isHelper('Protractor')) this.skip();
+
+      await I.amOnPage('/form/field');
+      await I.fillField('Name', '');
+      const time = Date.now();
+      await I.type('12345', 100);
+      await I.seeInField('Name', '12345');
+      assert(Date.now() - time > 500);
+    });
+  });
+
   describe('check fields: #seeInField, #seeCheckboxIsChecked, ...', () => {
     it('should check for empty field', async () => {
       await I.amOnPage('/form/empty');
@@ -639,7 +682,6 @@ module.exports.tests = function () {
       assert.equal(vals[1], 'Second');
       assert.equal(vals[2], 'Third');
     });
-
 
     it('should grab value from field', async () => {
       await I.amOnPage('/form/hidden');
@@ -1270,7 +1312,6 @@ module.exports.tests = function () {
         e.message.should.include('expected all elements (h3) to have CSS property {"font-weight":"non-bold"}');
       }
     });
-
 
     it('should check css property for several elements', async function () {
       if (isHelper('Nightmare')) return;

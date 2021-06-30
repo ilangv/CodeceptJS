@@ -1,3 +1,48 @@
+## 2.6.11
+
+* [Playwright] Playwright 1.4 compatibility
+* [Playwright] Added `ignoreHTTPSErrors` config option (default: false). See #2566 by gurjeetbains 
+* Added French translation by @vimar 
+* [WebDriver] Updated `dragSlider` to work in WebDriver W3C protocol. Fixes #2557 by suniljaiswal01  
+
+## 2.6.10
+
+* Fixed saving options for suite via `Feature('title', {key: value})` by @Diokuz. See #2553 and [Docs](https://codecept.io/advanced/#dynamic-configuration)
+
+## 2.6.9
+
+* [Puppeteer][Playwright] SessionStorage is now cleared in after hook. See #2524
+* When helper load failed the error stack is now logged by @SkReD. See #2541
+* Small documentation fixes.
+
+## 2.6.8
+
+* [WebDriver][Protractor][Playwright][Puppeteer][Nightmare] `saveElementScreenshot` method added to make screenshot of an element. By @suniljaiswal01
+* [Playwright][Puppeteer] Added `type` method to type a text using keyboard with an optional delay.
+* [WebDriver] Added optional `delay` argument to `type` method to slow down typing.
+* [Puppeteer] Fixed `amOnPage` freeze when `getPageTimeout` is 0"; set 30 sec as default timeout by @Vorobeyko.
+* Fixed printing step with null argument in custom helper by @sjana-aj. See #2494
+* Fix missing screenshot on failure when REST helper is in use #2513 by @PeterNgTr
+* Improve error logging in the `screenshotOnFail` plugin #2512 by @pablopaul
+
+## 2.6.7
+
+* Add REST helper into `standardActingHelpers` array #2474 by @PeterNgTr
+* Add missing `--invert` option for `run-workers` command #2504 by @pablopaul
+* [WebDriver] Introduce `forceRightClick` method #2485 bylsuniljaiswal01
+* [Playwright] Fix `setCookie` method #2491 by @bmbarker90
+* [TypeScript] Update compilerOptions.target to es2017 #2483 by @shanplourde
+* [Mocha] Honor reporter configuration #2465 by @trinhpham
+
+## 2.6.6
+
+* Puppeteer 4.0 support. Important: MockRequest helper won't work with Puppeter > 3.3
+* Added `xFeature` and `Feature.skip` to skip all tests in a suite. By @Georgegriff
+* [Appium] Fixed #2428 Android native locator support by @idxn
+* [WebDriver] Fixed `waitNumberOfVisibleElements` to actually filter visible elements. By @ilangv
+* [Puppeteer] Fixed handling error which is not an Error object. Fixes `cannot read property indexOf of undefined` error. Fix #2436 by @Georgegriff
+* [Puppeteer] Print error on page crash by @Georgegriff
+
 ## 2.6.5
 
 * Added `test.skipped` event to run-workers, fixing allure reports with skipped tests in workers #2391. Fix #2387 by @koushikmohan1996
@@ -146,7 +191,7 @@ I.see('You are logged out');
   * works with WebDriver helper
 * Avoid failiure report on successful retry in worker by @koushikmohan1996
 * Added translation ability to Scenario, Feature and other context methods by @koushikmohan1996
-  * 📢 Please help us translate context methods to your language! See [italian translation](https://github.com/Codeception/CodeceptJS/blob/master/translations/it-IT.js#L3) as an example and send [patches to vocabularies](https://github.com/Codeception/CodeceptJS/tree/master/translations).
+  * 📢 Please help us translate context methods to your language! See [italian translation](https://github.com/codeceptjs/CodeceptJS/blob/master/translations/it-IT.js#L3) as an example and send [patches to vocabularies](https://github.com/codeceptjs/CodeceptJS/tree/master/translations).
 * allurePlugin: Added `say` comments to allure reports by @PeterNgTr.
 * Fixed no custom output folder created when executed with run-worker. Fix by @PeterNgTr
 * [Puppeteer] Fixed error description for context element not found. See #2065. Fix by @PeterNgTr
@@ -231,7 +276,7 @@ I.click('$register_button');
 Changed pressKey method to resolve issues and extend functionality.
   * Did not properly recognize 'Meta' (or 'Command') as modifier key.
   * Right modifier keys did not work in WebDriver using JsonWireProtocol.
-  * 'Shift' + <key> combination would not reflect actual keyboard behavior.
+  * 'Shift' + 'key' combination would not reflect actual keyboard behavior.
   * Respect sequence with multiple modifier keys passed to pressKey.
   * Added support to automatic change operation modifier key based on operating system.
 * [Puppeteer][WebDriver] Added `pressKeyUp` and `pressKeyDown` to press and release modifier keys like `Control` or `Shift`. By @martomo.
@@ -351,7 +396,7 @@ I.mockRequest('POST', '/users', { user: { name: 'fake' }});
 
 ## 2.1.5
 
-* **EXPERIMENTAL** [Wix Detox support](https://github.com/Codeception/detox-helper) introduced as standalone helper. Provides a faster alternative to Appium for mobile testing.
+* **EXPERIMENTAL** [Wix Detox support](https://github.com/codeceptjs/detox-helper) introduced as standalone helper. Provides a faster alternative to Appium for mobile testing.
 * Saving successful commands inside interactive pause into `_output/cli-history` file. By @hubidu
 * Fixed hanging error handler inside scenario. See #1721 by @haily-lgc.
 * Fixed by @Vorobeyko: tests did not fail when an exception was raised in async bootstrap.
@@ -584,7 +629,7 @@ Use it with `FileSystem` helper to test availability of a file:
 * **Using `codecept.conf.js` as default configuration format**
 * Fixed "enametoolong" error when saving screenshots for data driven tests by @PeterNgTr
 * Updated NodeJS to 10 in Docker image
-* [Pupeteer] Add support to use WSEndpoint. Allows to execute tests remotely. [See #1350] by @gabrielcaires (https://github.com/Codeception/CodeceptJS/pull/1350)
+* [Pupeteer] Add support to use WSEndpoint. Allows to execute tests remotely. [See #1350] by @gabrielcaires (https://github.com/codeceptjs/CodeceptJS/pull/1350)
 * In interactive shell [Enter] goes to next step. Improvement by @PeterNgTr.
 * `I.say` accepts second parameter as color to print colorful comments. Improvement by @PeterNgTr.
 
@@ -1316,7 +1361,7 @@ codeceptjs run users_test.js -c tests
 
 * Protractor ^5.0.0 support (while keeping ^4.0.9 compatibility)
 * Fix 'fullTitle() is not a function' in exit.js by @hubidu. See #388.
-* [Nightmare] Fix for `waitTimeout` by @HughZurname. See #391. Resolves #236* Dockerized CodeceptJS setup by @artiomnist. [See reference](https://github.com/Codeception/CodeceptJS/blob/master/docker/README.md)
+* [Nightmare] Fix for `waitTimeout` by @HughZurname. See #391. Resolves #236* Dockerized CodeceptJS setup by @artiomnist. [See reference](https://github.com/codeceptjs/CodeceptJS/blob/master/docker/README.md)
 
 ## 0.4.16
 
@@ -1415,7 +1460,7 @@ codeceptjs run -o '{ "bootstrap": "bootstrap.js"}'
 codeceptjs run -o '{ "helpers": {"WebDriverIO": {"browser": "chrome"}}}'
 ```
 
-* Added [regression tests](https://github.com/Codeception/CodeceptJS/tree/master/test/runner) for codeceptjs tests runner.
+* Added [regression tests](https://github.com/codeceptjs/CodeceptJS/tree/master/test/runner) for codeceptjs tests runner.
 
 ## 0.4.11
 

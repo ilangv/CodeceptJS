@@ -218,7 +218,7 @@ title: ${name}
     // publish wiki pages to website
     if (!fs.existsSync('docs/wiki/Home.md')) {
       await git((fn) => {
-        fn.clone('git@github.com:Codeception/CodeceptJS.wiki.git', 'docs/wiki');
+        fn.clone('git@github.com:codeceptjs/CodeceptJS.wiki.git', 'docs/wiki');
       });
     }
     await chdir('docs/wiki', () => git(cfg => cfg.pull('origin master')));
@@ -231,9 +231,9 @@ title: ${name}
       cfg.line('---');
       cfg.line('');
       cfg.line('# Community Helpers');
-      cfg.line('> Share your helpers at our [Wiki Page](https://github.com/Codeception/CodeceptJS/wiki/Community-Helpers)');
+      cfg.line('> Share your helpers at our [Wiki Page](https://github.com/codeceptjs/CodeceptJS/wiki/Community-Helpers)');
       cfg.line('');
-      cfg.textFromFile('docs/wiki/Community-Helpers.md');
+      cfg.textFromFile('docs/wiki/Community-Helpers-&-Plugins.md');
     });
 
     writeToFile('docs/examples.md', (cfg) => {
@@ -246,7 +246,7 @@ title: ${name}
       cfg.line('---');
       cfg.line('');
       cfg.line('# Examples');
-      cfg.line('> Add your own examples to our [Wiki Page](https://github.com/Codeception/CodeceptJS/wiki/Examples)');
+      cfg.line('> Add your own examples to our [Wiki Page](https://github.com/codeceptjs/CodeceptJS/wiki/Examples)');
       cfg.textFromFile('docs/wiki/Examples.md');
     });
 
@@ -260,7 +260,7 @@ title: ${name}
       cfg.line('---');
       cfg.line('');
       cfg.line('# Books & Posts');
-      cfg.line('> Add your own books or posts to our [Wiki Page](https://github.com/Codeception/CodeceptJS/wiki/Books-&-Posts)');
+      cfg.line('> Add your own books or posts to our [Wiki Page](https://github.com/codeceptjs/CodeceptJS/wiki/Books-&-Posts)');
       cfg.textFromFile('docs/wiki/Books-&-Posts.md');
     });
 
@@ -273,11 +273,10 @@ title: ${name}
       cfg.line('editLink: false');
       cfg.line('---');
       cfg.line('');
-      cfg.line('> Add your own videos to our [Wiki Page](https://github.com/Codeception/CodeceptJS/wiki/Videos)');
+      cfg.line('> Add your own videos to our [Wiki Page](https://github.com/codeceptjs/CodeceptJS/wiki/Videos)');
       cfg.textFromFile('docs/wiki/Videos.md');
     });
   },
-
 
   async docsAppium() {
     // generates docs for appium
@@ -325,7 +324,7 @@ title: ${name}
       await exec(`rm -rf ${dir}`);
     }
 
-    await git((fn) => fn.clone('git@github.com:codecept-js/website.git', dir));
+    await git((fn) => fn.clone('git@github.com:codeceptjs/website.git', dir));
     await copy('docs', 'website/docs');
 
     await chdir(dir, async () => {
@@ -379,7 +378,6 @@ title: ${name}
 
 };
 
-
 async function processChangelog() {
   const file = 'CHANGELOG.md';
   let changelog = fs.readFileSync(file).toString();
@@ -388,7 +386,7 @@ async function processChangelog() {
   changelog = changelog.replace(/\s@([\w-]+)/mg, ' **[$1](https://github.com/$1)**');
 
   // issue
-  changelog = changelog.replace(/#(\d+)/mg, '[#$1](https://github.com/Codeception/CodeceptJS/issues/$1)');
+  changelog = changelog.replace(/#(\d+)/mg, '[#$1](https://github.com/codeceptjs/CodeceptJS/issues/$1)');
 
   // helper
   changelog = changelog.replace(/\s\[(\w+)\]\s/mg, ' **[$1]** ');

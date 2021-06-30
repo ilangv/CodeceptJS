@@ -23,7 +23,7 @@ Helpers can be created by running a generator command:
 npx codeceptjs gh
 ```
 
-*(or `generate helper`)*
+*(or `npx codeceptjs generate:helper`)*
 
 This command generates a basic helper and appends it to `helpers` section of config file:
 
@@ -36,7 +36,7 @@ helpers: {
 }
 ```
 
-Helpers are ES6 classes inherited from [corresponding abstract class](https://github.com/Codeception/CodeceptJS/blob/master/lib/helper.js).
+Helpers are ES6 classes inherited from [corresponding abstract class](https://github.com/codeceptjs/CodeceptJS/blob/master/lib/helper.js).
 Generated Helper will be added to `codecept.conf.js` config file. It should look like this:
 
 ```js
